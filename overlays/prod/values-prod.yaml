@@ -1,0 +1,10 @@
+replicaCount: 5
+
+image:
+  repository: nginx
+  tag: "1.23"
+  pullPolicy: IfNotPresent
+
+rollout:
+  autoPromotionEnabled: false
+  autoPromotionSeconds: 0
