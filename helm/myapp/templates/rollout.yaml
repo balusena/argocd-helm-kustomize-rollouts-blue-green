@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: {{ .Chart.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.containerPort }}
+  strategy:
+    blueGreen:
+      activeService: {{ default (printf "%s-active" .Chart.Name) .Values.rollout.activeService }}
+      previewService: {{ default (printf "%s-green" .Chart.Name) .Values.rollout.previewService }}
+      autoPromotionEnabled: {{ .Values.rollout.autoPromotionEnabled }}
+      autoPromotionSeconds: {{ .Values.rollout.autoPromotionSeconds }}
