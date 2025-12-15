@@ -1,8 +1,8 @@
 replicaCount: 3
 
 image:
-  repository: nginx
-  tag: latest
+  repository: nginxdemos/hello
+  tag: plain-text
   pullPolicy: IfNotPresent
 
 rollout:
