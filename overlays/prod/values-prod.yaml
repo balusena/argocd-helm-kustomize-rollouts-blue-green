@@ -1,8 +1,8 @@
 replicaCount: 5
 
 image:
-  repository: nginx
-  tag: "1.23"
+  repository: nginxdemos/hello
+  tag: plain-text-v2
   pullPolicy: IfNotPresent
 
 rollout:
